@@ -1,0 +1,60 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'vim-scripts/AutoComplPop'
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line	
+set nu
+set textwidth=80
+set wrap linebreak nolist
+set tabstop=4
+
+filetype plugin indent on "Включает определение типа файла, загрузку...
+"... соответствующих ему плагинов и файлов отступов
+set encoding=utf-8 "Ставит кодировку UTF-8
+set nocompatible "Отключает обратную совместимость с Vi
+syntax enable "Включает подсветку синтаксиса
+
+if empty(glob('~/.vim/autoload/plug.vim')) "Если vim-plug не стоит
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs "Создать директорию
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  "И скачать его оттуда
+  "А после прогнать команду PlugInstall, о которой мы сейчас поговорим
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/bundle') "Начать искать плагины в этой директории
+"Тут будут описаны наши плагины
+Plug 'ErichDonGubler/vim-sublime-monokai' "Добавьте это в список плагинов
+Plug 'vim-airline/vim-airline'
+ 
+call plug#end() "Перестать это делать
+colorscheme sublimemonokai "Добавьте это НЕ в список плагинов
+
+let g:airline#extensions#keymap#enabled = 0
+let g:airline_section_z = "\ue0a1:%l/%L Col:%c"
+let g:Powerline_symbols='unicode'
+set ttimeoutlen=10
+let &t_SI.="\e[5 q"
+let &t_SR.="\e[3 q"
+let &t_EI.="\e[1 q"
+
+
